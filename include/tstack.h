@@ -4,30 +4,31 @@
 
 template <typename T, int SIZE>
 class TStack {
-private:
-    T data[SIZE];
-    int top;
-public:
-    TStack() : top(-1) {}
-    void push(const T& value) {
-        if (top < SIZE - 1) {
-            data[++top] = value;
-        }
+ private:
+  T data[SIZE];
+  int top;
+
+ public:
+  TStack() : top(-1) {}
+  void push(const T& value) {
+    if (top < SIZE - 1) {
+      data[++top] = value;
     }
-    T pop() {
-        if (top >= 0) {
-            return data[top--];
-        }
-        return T(); // Возвращаем значение по умолчанию, если стек пуст
+  }
+  T pop() {
+    if (top >= 0) {
+      return data[top--];
     }
-    T peek() const {
-        if (top >= 0) {
-            return data[top];
-        }
-        return T();
+    return T(); // Возвращаем значение по умолчанию, если стек пуст
+  }
+  T peek() const {
+    if (top >= 0) {
+      return data[top];
     }
-    bool isEmpty() const {
-        return top == -1;
-    }
+    return T();
+  }
+  bool isEmpty() const {
+    return top == -1;
+  }
 };
 #endif  // INCLUDE_TSTACK_H_
