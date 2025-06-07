@@ -1,37 +1,33 @@
 // Copyright 2021 NNTU-CS
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
-#include <stdexcept>
 
-template<typename T, int kSize>
+template <typename T, int SIZE>
 class TStack {
- private:
-    T data[kSize];
-    int top_index;
-
- public:
-    TStack() : top_index(-1) {}
+private:
+    T data[SIZE];
+    int top;
+public:
+    TStack() : top(-1) {}
     void push(const T& value) {
-        if (top_index >= kSize - 1) {
-            throw std::overflow_error("Стек переполнен");
+        if (top < SIZE - 1) {
+            data[++top] = value;
         }
-        data[++top_index] = value;
     }
     T pop() {
-        if (isEmpty()) {
-            throw std::underflow_error("Стек неполный");
+        if (top >= 0) {
+            return data[top--];
         }
-        return data[top_index--];
+        return T(); // Возвращаем значение по умолчанию, если стек пуст
     }
     T peek() const {
-        if (isEmpty()) {
-            throw std::underflow_error("Стек пуст");
+        if (top >= 0) {
+            return data[top];
         }
-        return data[top_index];
+        return T();
     }
     bool isEmpty() const {
-        return top_index == -1;
+        return top == -1;
     }
 };
-
 #endif  // INCLUDE_TSTACK_H_
